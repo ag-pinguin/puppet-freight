@@ -18,11 +18,11 @@
 #
 # == Examples
 #
-# class { 'freight':
-#   varcache => '/var/www/repos',
-#   gpg_key_email => 'packager@domain.com',
-#   gpg_key_passphrase => 'mysecretpassphrase',
-# }
+#   class { 'freight':
+#       varcache => '/var/www/repos',
+#       gpg_key_email => 'packager@domain.com',
+#       gpg_key_passphrase => 'mysecretpassphrase',
+#   }
 #
 # == Authors
 #
@@ -30,8 +30,7 @@
 #
 # == License
 #
-# BSD-lisence
-# See file LICENSE for details
+# BSD-license. See file LICENSE for details.
 #
 class freight
 (
