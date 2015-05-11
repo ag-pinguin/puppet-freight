@@ -5,6 +5,9 @@
 #
 # == Parameters
 #
+# [*manage*]
+#  Whether to manage freight with Puppet or not. Valid values are 'yes' 
+#  (default) and 'no'.
 # [*varcache*]
 #   The directory where freight-managed repositories are placed. For example 
 #   '/var/www/repos'. Make sure the parent directory exists. No default value.
@@ -36,20 +39,20 @@ class freight
 (
     $varcache,
     $gpg_key_email,
-    $gpg_key_passphrase=''
+    $gpg_key_passphrase=undef,
+    $manage = 'yes'
 )
 {
 
-# Rationale for this is explained in init.pp of the sshd module
-if hiera('manage_freight', 'true') != 'false' {
+if $manage == 'yes' {
 
-    include freight::aptrepo
+    include ::freight::aptrepo
 
-    include freight::install
+    include ::freight::install
 
-    class { 'freight::config':
-        varcache => $varcache,
-        gpg_key_email => $gpg_key_email,
+    class { '::freight::config':
+        varcache           => $varcache,
+        gpg_key_email      => $gpg_key_email,
         gpg_key_passphrase => $gpg_key_passphrase,
     }
 }

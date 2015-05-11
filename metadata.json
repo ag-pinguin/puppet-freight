@@ -1,0 +1,13 @@
+{
+  "name": "puppetfinland-freight",
+  "version": "0.5.1",
+  "author": "Puppet-Finland team",
+  "license": "BSD license",
+  "summary": "Setup freight",
+  "source": "https://github.com/Puppet-Finland/freight.git",
+  "project_page": "https://github.com/Puppet-Finland/freight",
+  "dependencies": [
+    { "name": "puppetfinland/os", "version_requirement": ">= 0.5.5" },
+    { "name": "puppetlabs/apt", "version_requirement": ">= 2.0.0" }
+  ]
+}

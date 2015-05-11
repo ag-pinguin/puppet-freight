@@ -6,16 +6,19 @@
 #
 # <https://forge.puppetlabs.com/puppetlabs/apt>
 #
-class freight::aptrepo {
+class freight::aptrepo inherits freight::params {
+
+    include ::apt
 
     apt::source { 'freight-aptrepo':
-        location          => 'http://packages.rcrowley.org',
-        release           => "${::lsbdistcodename}",
-        repos             => 'main',
-        required_packages => undef,
-        key               => '7DF49CEF',
-        key_source        => 'http://packages.rcrowley.org/keyring.gpg',
-        pin               => '501',
-        include_src       => false,
+        ensure   => 'present',
+        location => 'http://packages.rcrowley.org',
+        release  => $::lsbdistcodename,
+        repos    => 'main',
+        pin      => '501',
+        key      => {
+            'id'     => '9CF9E62D541145B65B30961F29B2064E7DF49CEF',
+            'source' => 'http://packages.rcrowley.org/keyring.gpg',
+        },
     }
 }
