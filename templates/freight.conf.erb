@@ -3,7 +3,7 @@
 # Directories for the Freight library and Freight cache.  Your web
 # server's document root should be `$VARCACHE`.
 VARLIB="/var/lib/freight"
-VARCACHE="<%= varcache %>"
+VARCACHE="<%= @varcache %>"
 
 # Default `Origin` and `Label` fields for `Release` files.
 ORIGIN="Freight"
@@ -16,11 +16,10 @@ CACHE="off"
 # GPG key to use to sign repositories.  This is required by the `apt`
 # repository provider.  Use `gpg --gen-key` (see `gpg`(1) for more
 # details) to generate a key and put its email address here.
-GPG="<%= gpg_key_email %>"
+GPG="<%= @gpg_key_email %>"
 
-<% if not gpg_key_passphrase == "" %>
-GPG_PASSPHRASE_FILE="/etc/freight.pass"
-<% end -%>
+
+<%= @gpg_key_passphrase_line %>
 
 # Whether to follow symbolic links in `$VARLIB` to produce extra components
 # in the cache directory (on) or not (off).

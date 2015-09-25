@@ -12,6 +12,12 @@ class freight::config
 ) inherits freight::params
 {
 
+    if $gpg_key_passphrase {
+        $gpg_key_passphrase_line = 'GPG_PASSPHRASE_FILE="/etc/freight.pass"'
+    } else {
+        $gpg_key_passphrase_line = '#GPG_PASSPHRASE_FILE="/etc/freight.pass"'
+    }
+
     # The directory served by the webserver
     file { 'freight-varcache-dir':
         ensure => directory,
