@@ -12,13 +12,13 @@ class freight::aptrepo inherits freight::params {
 
     apt::source { 'freight-aptrepo':
         ensure   => 'present',
-        location => 'http://packages.rcrowley.org',
+        location => 'http://build.openvpn.net/freight_team',
         release  => $::lsbdistcodename,
         repos    => 'main',
         pin      => '501',
         key      => {
-            'id'     => '9CF9E62D541145B65B30961F29B2064E7DF49CEF',
-            'source' => 'http://packages.rcrowley.org/keyring.gpg',
+            'id'     => '30EBF4E73CCE63EEE124DD278E6DA8B4E158C569',
+            'source' => 'https://swupdate.openvpn.net/repos/repo-public.gpg',
         },
     }
 }
