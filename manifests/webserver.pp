@@ -24,8 +24,8 @@ class freight::webserver
     # We're only interested in setting up a single server definition, so using 
     # $::fqdn for server_name, log file name, etc. is fine.
     nginx::http_server { 'freight':
-        server_name   => $::fqdn,
         ensure        => 'present',
+        server_name   => $::fqdn,
         listen_port   => 80,
         document_root => $document_root,
         autoindex     => 'on',

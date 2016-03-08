@@ -25,32 +25,18 @@
 # [*document_root*]
 #   The document root for the webserver. This parameter is ignored unless you've 
 #   set $manage_webserver to true. Defaults to '/var/www'.
-# [*varcache*]
-#   The directory where freight-managed repositories are placed. The default 
-#   value is '/var/www/apt'.
-# [*gpg_key_id*]
-#   The ID of the key to install. For example 'D50582E6'. The private and public 
-#   keys need to be on the Puppet fileserver and accessible at these URIs:
-#   
-#   "puppet:///files/${gpg_key_id}-private.key"
-#   
-#   "puppet:///files/${gpg_key_id}-public.key"
-#
-# [*gpg_key_email*]
-#   Email address of the package signing key - check with "gpg --list-keys". No 
-#   default value.
-# [*gpg_key_passphrase*]
-#   The passphrase of the GPG keypair's private key. If omitted, freight will 
-#   ask for the passphrase whenever packages are added to the repo using 
-#   freight-add. No default value.
-#
-# == Examples
-#
-#   class { 'freight':
-#       gpg_key_id => 'D50582E6',
-#       gpg_key_email => 'packager@domain.com',
-#       gpg_key_passphrase => 'mysecretpassphrase',
-#   }
+# [*default_gpg_key_id*]
+#   The GPG key ID to use unless something else if defined by the 
+#   freight::config instance.
+# [*default_gpg_key_email*]
+#   The GPG key email to use unless something else if defined by the 
+#   freight::config instance.
+# [*default_gpg_key_passphrase*]
+#   The GPG key passphrase to use unless something else if defined by the 
+#   freight::config instance.
+# [*configs*]
+#   A hash of freight::config resources to realize. You need to define at least 
+#   one.
 #
 # == Authors
 #
@@ -64,15 +50,15 @@
 #
 class freight
 (
-    $gpg_key_id,
-    $gpg_key_email,
+    $default_gpg_key_id = undef,
+    $default_gpg_key_email = undef,
     $allow_address_ipv4 = 'anyv4',
     $allow_address_ipv6 = 'anyv6',
     $document_root = '/var/www',
-    $varcache = '/var/www/apt',
-    $gpg_key_passphrase=undef,
+    $default_gpg_key_passphrase=undef,
     $manage = true,
-    $manage_webserver = true
+    $manage_webserver = true,
+    $configs = {}
 )
 {
 
@@ -92,13 +78,12 @@ if $manage {
     include ::freight::aptrepo
     include ::freight::install
 
-    class { '::freight::config':
-        varcache           => $varcache,
-        gpg_key_id         => $gpg_key_id,
-        gpg_key_email      => $gpg_key_email,
-        gpg_key_passphrase => $gpg_key_passphrase,
-        # We need to pass this parameter to set the value of a require
-        manage_webserver   => $manage_webserver,
-    }
+    # Create one or more freight instances. While an overkill for a single 
+    # repository, this is required when hosting several unrelated repositories 
+    # on the same host.
+    $defaults = { 'manage_webserver' => $manage_webserver }
+
+    create_resources('freight::config', $configs, $defaults)
+
 }
 }
