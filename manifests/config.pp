@@ -48,6 +48,10 @@ define freight::config
         undef   => $::freight::default_gpg_key_email,
         default => $gpg_key_email,
     }
+    $l_gpg_key_passphrase = $gpg_key_passphrase ? {
+        undef   => $::freight::default_gpg_key_passphrase,
+        default => $gpg_key_passphrase,
+    }
 
     # Using validate_string does not work here, because undef gets converted 
     # into an empty string somewhere along the line.
@@ -68,7 +72,7 @@ define freight::config
 
     ### Freight configuration
 
-    if $gpg_key_passphrase {
+    if $l_gpg_key_passphrase {
         $gpg_key_passphrase_line = "GPG_PASSPHRASE_FILE=\"/etc/freight-${title}.pass\""
     } else {
         $gpg_key_passphrase_line = "#GPG_PASSPHRASE_FILE=\"/etc/freight-${title}.pass\""
