@@ -120,7 +120,7 @@ define freight::config
     }
 
     # File with the GPG key passphrase for allowing automatic signing
-    if $gpg_key_passphrase {
+    if $l_gpg_key_passphrase {
 
         file { "freight-${title}.pass":
             ensure  => present,
