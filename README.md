@@ -36,7 +36,7 @@ Creating a two freight repositories using Hiera:
 For details look here:
 
 * [Class: freight](manifests/init.pp)
-* [Class: freight::config](manifests/config.pp)
+* [Define: freight::config](manifests/config.pp)
 
 # Dependencies
 
