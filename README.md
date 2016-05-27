@@ -48,6 +48,7 @@ This module has been tested on
 
 * Debian 7
 * Ubuntu 12.04
+* Ubuntu 14.04
 
 Any Debian-based operating system should work out of the box or with small 
 modifications.
