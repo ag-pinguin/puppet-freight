@@ -1,6 +1,6 @@
 {
   "name": "puppetfinland-freight",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "author": "Puppet-Finland team",
   "summary": "Setup freight, an apt repository management tool",
   "license": "BSD-2-Clause",
