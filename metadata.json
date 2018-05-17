@@ -2,7 +2,7 @@
   "name": "puppetfinland-freight",
   "version": "2.0.1",
   "author": "Puppet-Finland team",
-  "license": "BSD license",
+  "license": "BSD-2-Clause",
   "summary": "Setup freight",
   "source": "https://github.com/Puppet-Finland/freight.git",
   "project_page": "https://github.com/Puppet-Finland/freight",
