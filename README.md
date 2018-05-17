@@ -6,51 +6,35 @@ residing on the same host.
 
 # Module usage
 
-Creating a two freight repositories using Hiera:
+Setup freight and nginx (using [puppetfinland/nginx](https://github.com/Puppet-Finland/puppet-nginx.git)):
 
-    classes:
-        - freight
-    
-    # Automatic webserver (nginx) configuration
-    freight::manage_webserver: true
-    freight::document_root: '/var/www/html'
-    freight::allow_address_ipv4: 'anyv4'
-    freight::allow_address_ipv6: 'anyv6'
-    
-    # Default GPG keys to use
-    freight::default_gpg_key_id: 'C42A86B2'
-    freight::default_gpg_key_email: 'john@domain.com'
-    
-    # Freight instances
-    freight::configs:
-        repo1:
-            # Use the default GPG keys and store the passphrase on disk 
-            varcache: '/var/www/html/repo1'
-            gpg_key_passphrase: 'mysecret'
-        repo2:
-            # Use a custom set of GPG keys and always prompt for the passphrase
-            varcache: '/var/www/html/repo2'
-            gpg_key_id: '974C71E8'
-            gpg_key_email: 'jane@domain.com'
+    class { '::freight':
+      manage_webserver      =>  true,
+      document_root         =>  '/var/www/html',
+      allow_address_ipv4    => 'anyv4',
+      allow_address_ipv6    => 'anyv6',
+      default_gpg_key_id    => 'C42A86B2',
+      default_gpg_key_email => 'john@example.org',
+    }
 
-For details look here:
+Create two freight repositories:
+
+    # This one uses the default GPG keys defined above and stores the passphrase
+    # on disk
+    ::freight::config { 'repo1':
+      varcache            => '/var/www/html/repo1',
+      gpg_key_passphrase  => 'mysecret',
+    }
+    
+    # This one uses a custom set of GPG keys and always prompts for the
+    # passphrase
+    ::freight::config { 'repo2':
+      varcache      => '/var/www/html/repo2',
+      gpg_key_id    => '974C71E8',
+      gpg_key_email => 'jane@example.org',
+    }
+
+For details look at these manifests:
 
 * [Class: freight](manifests/init.pp)
 * [Define: freight::config](manifests/config.pp)
-
-# Dependencies
-
-See [metadata.json](metadata.json).
-
-# Operating system support
-
-This module has been tested on
-
-* Debian 7
-* Ubuntu 12.04
-* Ubuntu 14.04
-
-Any Debian-based operating system should work out of the box or with small 
-modifications.
-
-For details see [params.pp](manifests/params.pp).
