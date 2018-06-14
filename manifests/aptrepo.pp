@@ -12,7 +12,7 @@ class freight::aptrepo inherits freight::params {
 
     apt::source { 'freight-aptrepo':
         ensure   => 'present',
-        location => 'http://build.openvpn.net/freight_team',
+        location => 'http://build.openvpn.net/debian/freight_team',
         release  => $::lsbdistcodename,
         repos    => 'main',
         pin      => '501',
