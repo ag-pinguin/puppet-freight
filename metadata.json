@@ -1,11 +1,11 @@
 {
-  "name": "puppetfinland-freight",
-  "version": "2.0.3",
-  "author": "Puppet-Finland team",
+  "name": "pinguinag-freight",
+  "version": "2.1.3",
+  "author": "Pinguin AG forked from Puppet-Finland team",
   "summary": "Setup freight, an apt repository management tool",
   "license": "BSD-2-Clause",
-  "source": "https://github.com/Puppet-Finland/puppet-freight.git",
-  "project_page": "https://github.com/Puppet-Finland/puppet-freight",
+  "source": "https://github.com/ag-pinguin/puppet-freight",
+  "project_page": "https://github.com/ag-pinguin/puppet-freight",
   "dependencies": [
     {
       "name": "puppetfinland/os",

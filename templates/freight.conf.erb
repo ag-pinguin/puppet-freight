@@ -6,8 +6,8 @@ VARLIB="<%= @varlib %>"
 VARCACHE="<%= @varcache %>"
 
 # Default `Origin` and `Label` fields for `Release` files.
-ORIGIN="Freight"
-LABEL="Freight"
+ORIGIN="<%= @origin %>"
+LABEL="<%= @label %>"
 
 # Cache the control files after each run (on), or regenerate them every
 # time (off).
@@ -18,8 +18,6 @@ CACHE="off"
 # details) to generate a key and put its email address here.
 GPG="<%= @l_gpg_key_email %>"
 
-
-<%= @gpg_key_passphrase_line %>
 
 # Whether to follow symbolic links in `$VARLIB` to produce extra components
 # in the cache directory (on) or not (off).
