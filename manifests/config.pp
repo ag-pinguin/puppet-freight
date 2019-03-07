@@ -79,7 +79,7 @@ define freight::config (
   file { "freight-${title}-varlib-dir":
     ensure  => directory,
     name    => $varlib,
-    mode    => '0755',
+    mode    => '0775',
     require => $require,
   }
 
