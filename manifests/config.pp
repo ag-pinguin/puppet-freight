@@ -31,6 +31,8 @@ define freight::config (
   String $origin,
   String $varcache,
   String $varlib,
+  String $www_group,
+  String $www_user,
   Optional[String] $gpg_key_id         = undef,
   Optional[String] $gpg_key_email      = undef,
   Optional[String] $gpg_key_passphrase = undef
@@ -70,16 +72,20 @@ define freight::config (
   # The directory served by the webserver
   file { "freight-${title}-varcache-dir":
     ensure  => directory,
-    name    => $varcache,
+    group   => $www_group,
     mode    => '0755',
+    name    => $varcache,
+    owner   => $www_user,
     require => $require,
   }
 
   # The freight lib directory used for staging the packages
   file { "freight-${title}-varlib-dir":
     ensure  => directory,
-    name    => $varlib,
+    group   => $www_group,
     mode    => '0775',
+    name    => $varlib,
+    owner   => $www_user,
     require => $require,
   }
 

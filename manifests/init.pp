@@ -49,12 +49,14 @@
 # BSD-license. See file LICENSE for details.
 #
 class freight (
-  String $allow_address_ipv4                   = 'anyv4',
-  String $allow_address_ipv6                   = 'anyv6',
-  Hash $configs                                = {},
-  String $document_root                        = '/var/www',
-  Boolean $manage                              = true,
-  Boolean $manage_webserver                    = true,
+  String   $allow_address_ipv4                 = 'anyv4',
+  String   $allow_address_ipv6                 = 'anyv6',
+  Hash     $configs                            = {},
+  String   $document_root                      = '/var/www',
+  Boolean  $manage                             = true,
+  Boolean  $manage_webserver                   = true,
+  String   $www_group                          = 'www-data',
+  String   $www_user                           = 'www-data',
   Optional[String] $default_gpg_key_email      = undef,
   Optional[String] $default_gpg_key_id         = undef,
   Optional[String] $default_gpg_key_passphrase = undef,
@@ -68,7 +70,7 @@ if $manage {
 
   if $manage_webserver {
     class { '::freight::webserver':
-      document_root    => $document_root,
+      document_root      => $document_root,
       allow_address_ipv4 => $allow_address_ipv4,
       allow_address_ipv6 => $allow_address_ipv6,
     }
